@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IDInfos>
+    <IDInfo>
+        <device_id>xxxxxxxxxxxxxxxxx1</device_id>          
+        <protocol>201815</protocol>            
+        <name>张三</name>                    
+        <sex>0</sex>                      
+        <nation>汉族</nation>                
+        <birthday>20170310</birthday>            
+        <address>北京市海淀区xx胡同2号</address>              
+        <id_number>12545619870405xxxx</id_number>          
+        <authority>北京市公安局</authority>          
+        <validity>20170310-20370310</validity>            
+        <id_image>nuibfbiwbwbfninb213u98h9723he8h9ds891j27h91=</id_image>            
+        <face_image>nuibfbiwbwbfninb213u98h9723he8h9ds891j27h91=</face_image>        
+        <verify_time>1535613035</verify_time>      
+        <verify_result>0</verify_result>  
+        <verify_score>0.8</verify_score>    
+    </IDInfo>
+    <IDInfo>
+        <device_id>xxxxxxxxxxxxxxxxx</device_id>          
+        <protocol>201815</protocol>            
+        <name>李四</name>                    
+        <sex>0</sex>                      
+        <nation>汉族</nation>                
+        <birthday>20170310</birthday>            
+        <address>北京市海淀区xx胡同2号</address>              
+        <id_number>12545619870405xxxx</id_number>          
+        <authority>北京市公安局</authority>          
+        <validity>20170310-20370310</validity>            
+        <id_image>nuibfbiwbwbfninb213u98h9723he8h9ds891j27h91=</id_image>            
+        <face_image>nuibfbiwbwbfninb213u98h9723he8h9ds891j27h91=</face_image>        
+        <verify_time>1535613035</verify_time>      
+        <verify_result>0</verify_result>  
+        <verify_score>0.8</verify_score>    
+    </IDInfo>
+</IDInfos>

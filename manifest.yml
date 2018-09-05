@@ -1,0 +1,7 @@
+applications:
+- name: shangtang
+  memory: 1024M
+  instances: 1
+  path: target/shangtang-image.war
+  env: 
+    SPRING_PROFILES_DEFAULT: cf
