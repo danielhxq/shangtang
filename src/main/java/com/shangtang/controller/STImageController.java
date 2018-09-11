@@ -11,14 +11,10 @@ import java.util.Locale;
 import org.bson.BsonDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,18 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.DuplicateKeyException;
 
-@Configuration
-@SpringBootApplication
-@EnableAutoConfiguration
+
 @RestController
-@RequestMapping(value = "/st")
-@ComponentScan(basePackages = { "com.shangtang.controller" })
+//@RequestMapping(value = "/st")
+//@ComponentScan(basePackages = { "com.shangtang.controller" })
 public class STImageController {
 
-	public static void main(String... args) {
-		SpringApplication.run(STImageController.class, args);
-	}
+//	public static void main(String... args) {
+//		SpringApplication.run(STImageController.class, args);
+//	}
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -52,14 +47,46 @@ public class STImageController {
 	private FaceReportRepository faceReportRepository;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/facereports", consumes = MediaType.APPLICATION_XML_VALUE)
+//	@ResponseBody
 	public void facereports(@RequestBody final FaceReports entities) {
 		// faceReportRepository.save();
 		FaceReportEntities e = conversionService.convert(entities, FaceReportEntities.class);
 //		System.out.println(entities.getFaceReports().toString());
-		faceReportRepository.save(e.getEntities());
+//		for(FaceReportEntity entity : e.getEntities()) {
+//		Query query = new Query();
+//		query.addCriteria(Criteria.where("group_id").is(entity.getGroup_id()));
+//		query.addCriteria(Criteria.where("person_id").is(entity.getPerson_id()));
+//		Update update = new Update();
+////		update.push("entity", entity);
+//		update.push("device_id", entity.getDevice_id());
+//		update.push("camera_id", entity.getCamera_id());
+//		update.push("camera_name", entity.getCamera_name());
+//		update.push("timestamp", entity.getTimestamp());
+//		update.push("trace_type", entity.getTrace_type());
+//		update.push("image", entity.getImage());
+//		update.push("lastModifiedTime", );
+//			mongoTemplate.upsert(query, update, FaceReportEntity.class);
+			try {
+//				faceReportRepository.save(e.getEntities());
+				mongoTemplate.insertAll(e.getEntities());
+			} catch(DuplicateKeyException ee) {
+//				ex.printStackTrace();
+				System.out.println("dddd");
+			}
+			
+//		}
+		//mongoTemplate.upse
+//		faceReportRepository.save(e.getEntities());
+//			return "NULL";
+	}
+	
+	@ExceptionHandler(DuplicateKeyException.class)
+	public String handleException(DuplicateKeyException ex) {
+		return ex.getMessage();
+		
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/idinfo")
+	@RequestMapping(method = RequestMethod.GET, value = "/facereports")
 	@ResponseBody
 	public List<FaceReport> test() throws Exception {
 		DBObject query1 = new BasicDBObject();

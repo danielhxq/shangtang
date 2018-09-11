@@ -3,15 +3,17 @@ package com.shangtang.controller;
 import java.util.Date;
 
 import org.bson.BsonBinary;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Document(collection = "FaceReport-test")
+@CompoundIndexes({
+		@CompoundIndex(name = "group_peron_timestamp_id", def = "{'group_id': 1, 'person_id': -1, 'timestamp': 1}", unique = true) })
 public class FaceReportEntity {
 
-	@Id
 	private String id;
 
 	private String request_id;

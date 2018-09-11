@@ -9,11 +9,9 @@ public class FaceReportsConverter implements Converter<FaceReports, FaceReportEn
 
 	@Override
 	public FaceReportEntities convert(FaceReports source) {
-		System.out.println("SSSSSSSSSSSSs");
 		if (source == null) {
 			return new FaceReportEntities();
 		}
-		System.out.println("SSSSSSSSSSSSs");
 		FaceReportEntities entities = new FaceReportEntities();
 		for (FaceReport fr : source.getFaceReports()) {
 			FaceReportEntity entity = new FaceReportEntity();
