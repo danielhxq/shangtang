@@ -1,44 +1,44 @@
 package com.shangtang.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-
-@XStreamAlias("FaceReport")
-public class FaceReport implements Serializable {
+public class SapFaceReport implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5095504872288917235L;
-	@XStreamAsAttribute
-	@XStreamAlias("request_id")
+	private static final long serialVersionUID = 6596547974040304903L;
+
+	private String id;
+
 	private String request_id;
-	@XStreamAsAttribute
-	@XStreamAlias("group_id")
+
 	private String group_id;
-	@XStreamAsAttribute
-	@XStreamAlias("person_id")
+
 	private String person_id;
-	@XStreamAsAttribute
-	@XStreamAlias("device_id")
+
 	private String device_id;
-	@XStreamAsAttribute
-	@XStreamAlias("camera_id")
+
 	private String camera_id;
-	@XStreamAsAttribute
-	@XStreamAlias("camera_name")
+
 	private String camera_name;
-	@XStreamAsAttribute
-	@XStreamAlias("timestamp")
+
 	private String timestamp;
-	@XStreamAsAttribute
-	@XStreamAlias("trace_type")
+
 	private String trace_type;
-	@XStreamAsAttribute
-	@XStreamAlias("image")
+
 	private String image;
+	private Date createTime;
+	private Date lastModifiedTime;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getRequest_id() {
 		return request_id;
@@ -112,11 +112,28 @@ public class FaceReport implements Serializable {
 		this.image = image;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(Date lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
+
 	@Override
 	public String toString() {
-		return "FaceReport [request_id=" + request_id + ", group_id=" + group_id + ", person_id=" + person_id
-				+ ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
-				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", image=" + image + "]";
+		return "SAPFaceReport [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
+				+ person_id + ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
+				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", image=" + image + ", createTime="
+				+ createTime + ", lastModifiedTime=" + lastModifiedTime + "]";
 	}
 
 }

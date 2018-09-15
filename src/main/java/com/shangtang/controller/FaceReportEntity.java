@@ -2,7 +2,7 @@ package com.shangtang.controller;
 
 import java.util.Date;
 
-import org.bson.BsonBinary;
+import org.bson.types.Binary;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -32,11 +32,15 @@ public class FaceReportEntity {
 
 	private String trace_type;
 
-	private BsonBinary image;
+	private Binary base64Image;
+
+	private String binaryImage;
 
 	@DateTimeFormat(iso = ISO.DATE_TIME)
+
 	private Date createTime;
 	@DateTimeFormat(iso = ISO.DATE_TIME)
+
 	private Date lastModifiedTime;
 
 	public String getId() {
@@ -111,14 +115,6 @@ public class FaceReportEntity {
 		this.trace_type = trace_type;
 	}
 
-	public BsonBinary getImage() {
-		return image;
-	}
-
-	public void setImage(BsonBinary image) {
-		this.image = image;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -135,12 +131,29 @@ public class FaceReportEntity {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
+	public Binary getBase64Image() {
+		return base64Image;
+	}
+
+	public void setBase64Image(Binary base64Image) {
+		this.base64Image = base64Image;
+	}
+
+	public String getBinaryImage() {
+		return binaryImage;
+	}
+
+	public void setBinaryImage(String binaryImage) {
+		this.binaryImage = binaryImage;
+	}
+
 	@Override
 	public String toString() {
 		return "FaceReportEntity [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
 				+ person_id + ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
-				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", image=" + image + ", createTime="
-				+ createTime + ", lastModifiedTime=" + lastModifiedTime + "]";
+				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", base64Image=" + base64Image
+				+ ", binaryImageUrl=" + binaryImage + ", createTime=" + createTime + ", lastModifiedTime="
+				+ lastModifiedTime + "]";
 	}
 
 }

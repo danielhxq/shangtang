@@ -2,7 +2,8 @@ package com.shangtang.controller;
 
 import java.util.Date;
 
-import org.bson.BsonBinary;
+import org.apache.commons.codec.binary.Base64;
+import org.bson.types.Binary;
 import org.springframework.core.convert.converter.Converter;
 
 public class FaceReportsConverter implements Converter<FaceReports, FaceReportEntities> {
@@ -15,7 +16,6 @@ public class FaceReportsConverter implements Converter<FaceReports, FaceReportEn
 		FaceReportEntities entities = new FaceReportEntities();
 		for (FaceReport fr : source.getFaceReports()) {
 			FaceReportEntity entity = new FaceReportEntity();
-
 			entity.setRequest_id(fr.getRequest_id());
 			entity.setGroup_id(fr.getGroup_id());
 			entity.setPerson_id(fr.getPerson_id());
@@ -24,9 +24,12 @@ public class FaceReportsConverter implements Converter<FaceReports, FaceReportEn
 			entity.setCamera_name(fr.getCamera_name());
 			entity.setTimestamp(fr.getTimestamp());
 			entity.setTrace_type(fr.getTrace_type());
-			entity.setImage(new BsonBinary(fr.getImage().getBytes()));
-			entity.setCreateTime(new Date());
-			entity.setLastModifiedTime(new Date());
+			byte[] image = fr.getImage().getBytes();
+			entity.setBase64Image(new Binary(image));
+			entity.setBinaryImage(new String(Base64.decodeBase64(image)));
+			Date now = new Date();
+			entity.setCreateTime(now);
+			entity.setLastModifiedTime(now);
 			entities.getEntities().add(entity);
 		}
 		return entities;

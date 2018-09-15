@@ -22,10 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.DuplicateKeyException;
-
 
 @RestController
 //@RequestMapping(value = "/st")
@@ -66,24 +64,32 @@ public class STImageController {
 //		update.push("image", entity.getImage());
 //		update.push("lastModifiedTime", );
 //			mongoTemplate.upsert(query, update, FaceReportEntity.class);
-			try {
+//
 //				faceReportRepository.save(e.getEntities());
-				mongoTemplate.insertAll(e.getEntities());
-			} catch(DuplicateKeyException ee) {
-//				ex.printStackTrace();
-				System.out.println("dddd");
-			}
-			
+		mongoTemplate.insertAll(e.getEntities());
+
 //		}
-		//mongoTemplate.upse
+		// mongoTemplate.upse
 //		faceReportRepository.save(e.getEntities());
 //			return "NULL";
 	}
-	
+
 	@ExceptionHandler(DuplicateKeyException.class)
 	public String handleException(DuplicateKeyException ex) {
-		return ex.getMessage();
-		
+//		logger.error("SQLException Occured:: URL="+ex.getErrorCode());
+		String str = ex.getMessage();
+		System.out.println("AAA=" + str);
+		str = str.substring(str.indexOf("key:") + 4, str.indexOf("}'") + 1);
+		System.out.println(str);
+		String[] ss = str.split(":");
+		final StringBuilder sb = new StringBuilder();
+		if (ss != null && ss.length == 4) {
+			sb.append(ss[0]).append("group_id:").append(ss[1]).append("person_id:").append(ss[2]).append("timestamp:")
+					.append(ss[3]);
+		} else {
+			return str;
+		}
+		return sb.toString();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/facereports")
@@ -102,25 +108,25 @@ public class STImageController {
 		// query1.put("device_id", new BasicDBObject("$in", l));
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 		query1.put("createTime", new BasicDBObject("$gte", to));
-		DBCursor dbCursor = mongoTemplate.getCollection("FaceReport-test").find(query1);
+//		DBCursor dbCursor = mongoTemplate.getCollection("FaceReport-test").find(query1);
 		List<FaceReport> list = new LinkedList<FaceReport>();
-		int i = 0;
-		while (dbCursor.hasNext()) {
-			DBObject object = dbCursor.next();
-			FaceReport te = new FaceReport();
-			te.setDevice_id(object.get("device_id").toString());
-			// te.setTime((Date) object.get("time"));
-			list.add(te);
-			i++;
-			if (i == 40000) {
-				break;
-			}
-		}
-		System.out.println("ssss1");
-		// for (FaceReport s : list) {
-		// System.out.println(s.getDevice_id());
-		// }
-		System.out.println(list.size());
+//		int i = 0;
+//		while (dbCursor.hasNext()) {
+//			DBObject object = dbCursor.next();
+//			FaceReport te = new FaceReport();
+//			te.setDevice_id(object.get("device_id").toString());
+//			// te.setTime((Date) object.get("time"));
+//			list.add(te);
+//			i++;
+//			if (i == 40000) {
+//				break;
+//			}
+//		}
+//		System.out.println("ssss1");
+//		// for (FaceReport s : list) {
+//		// System.out.println(s.getDevice_id());
+//		// }
+//		System.out.println(list.size());
 		// return product.getId();
 		return list;
 	}

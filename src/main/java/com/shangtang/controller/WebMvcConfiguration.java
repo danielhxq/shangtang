@@ -8,11 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.format.support.FormattingConversionService;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.data.mongodb.core.mapping.event.LoggingEventListener;
 
 @Configuration
-public class WebMvcConfiguration{
+public class WebMvcConfiguration {
 
 //	 @Override
 //	 public FormattingConversionService mvcConversionService() {
@@ -36,5 +35,10 @@ public class WebMvcConfiguration{
 		bean.setConverters(converters);
 		bean.afterPropertiesSet();
 		return bean.getObject();
+	}
+
+	@Bean
+	public LoggingEventListener mappingEventsListener() {
+		return new LoggingEventListener();
 	}
 }
