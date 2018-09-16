@@ -13,19 +13,6 @@ import org.springframework.data.mongodb.core.mapping.event.LoggingEventListener;
 @Configuration
 public class WebMvcConfiguration {
 
-//	 @Override
-//	 public FormattingConversionService mvcConversionService() {
-//	 System.out.println("Foerere");
-//	 FaceReportsConverter telephoneConverter = new FaceReportsConverter();
-//	 // StringToDateConverter dateConverter = new
-//	 // StringToDateConverter("YYYY-MM-dd");
-//	 FormattingConversionService formattingConversionService =
-//	 super.mvcConversionService();
-//	 formattingConversionService.addConverter(telephoneConverter);
-//	 // formattingConversionService.addConverter(dateConverter);
-//	 return formattingConversionService;
-//	 }
-
 	@Bean
 	public ConversionService conversionService() {
 		ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();

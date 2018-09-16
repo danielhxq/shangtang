@@ -1,6 +1,5 @@
 package com.shangtang.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,15 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "FaceReports")
 @XmlAccessorType(XmlAccessType.FIELD)
-// @Data
-// @AllArgsConstructor
-// @NoArgsConstructor
-public class FaceReports implements Serializable {
+public class FaceReports {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -161500285428906574L;
 	@XmlElement(name = "FaceReport")
 	private List<FaceReport> faceReports;
 

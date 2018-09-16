@@ -31,6 +31,7 @@ public class SapFaceReport implements Serializable {
 	private String image;
 	private Date createTime;
 	private Date lastModifiedTime;
+	private String imageDownloadUrl;
 
 	public String getId() {
 		return id;
@@ -128,12 +129,21 @@ public class SapFaceReport implements Serializable {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
+	public String getImageDownloadUrl() {
+		return imageDownloadUrl;
+	}
+
+	public void setImageDownloadUrl(String imageDownloadUrl) {
+		this.imageDownloadUrl = imageDownloadUrl;
+	}
+
 	@Override
 	public String toString() {
-		return "SAPFaceReport [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
+		return "SapFaceReport [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
 				+ person_id + ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
 				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", image=" + image + ", createTime="
-				+ createTime + ", lastModifiedTime=" + lastModifiedTime + "]";
+				+ createTime + ", lastModifiedTime=" + lastModifiedTime + ", imageDownloadUrl=" + imageDownloadUrl
+				+ "]";
 	}
 
 }

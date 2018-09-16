@@ -8,34 +8,40 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 @XStreamAlias("FaceReport")
 public class FaceReport implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5095504872288917235L;
+
 	@XStreamAsAttribute
 	@XStreamAlias("request_id")
 	private String request_id;
+
 	@XStreamAsAttribute
 	@XStreamAlias("group_id")
 	private String group_id;
+
 	@XStreamAsAttribute
 	@XStreamAlias("person_id")
 	private String person_id;
+
 	@XStreamAsAttribute
 	@XStreamAlias("device_id")
 	private String device_id;
+
 	@XStreamAsAttribute
 	@XStreamAlias("camera_id")
 	private String camera_id;
+
 	@XStreamAsAttribute
 	@XStreamAlias("camera_name")
 	private String camera_name;
+
 	@XStreamAsAttribute
 	@XStreamAlias("timestamp")
 	private String timestamp;
+
 	@XStreamAsAttribute
 	@XStreamAlias("trace_type")
 	private String trace_type;
+
 	@XStreamAsAttribute
 	@XStreamAlias("image")
 	private String image;

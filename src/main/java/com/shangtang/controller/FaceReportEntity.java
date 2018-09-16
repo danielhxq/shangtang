@@ -3,6 +3,7 @@ package com.shangtang.controller;
 import java.util.Date;
 
 import org.bson.types.Binary;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,9 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Document(collection = "FaceReport-test")
 @CompoundIndexes({
-		@CompoundIndex(name = "group_peron_timestamp_id", def = "{'group_id': 1, 'person_id': -1, 'timestamp': 1}", unique = true) })
+		@CompoundIndex(name = "group_peron_timestamp_id", def = "{'group_id': 1, 'person_id': 1, 'timestamp': 1}", unique = true) })
 public class FaceReportEntity {
 
+	@Id
 	private String id;
 
 	private String request_id;
@@ -34,7 +36,7 @@ public class FaceReportEntity {
 
 	private Binary base64Image;
 
-	private String binaryImage;
+	private Binary binaryImage;
 
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 
@@ -139,11 +141,11 @@ public class FaceReportEntity {
 		this.base64Image = base64Image;
 	}
 
-	public String getBinaryImage() {
+	public Binary getBinaryImage() {
 		return binaryImage;
 	}
 
-	public void setBinaryImage(String binaryImage) {
+	public void setBinaryImage(Binary binaryImage) {
 		this.binaryImage = binaryImage;
 	}
 
@@ -152,7 +154,7 @@ public class FaceReportEntity {
 		return "FaceReportEntity [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
 				+ person_id + ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
 				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", base64Image=" + base64Image
-				+ ", binaryImageUrl=" + binaryImage + ", createTime=" + createTime + ", lastModifiedTime="
+				+ ", binaryImage=" + binaryImage + ", createTime=" + createTime + ", lastModifiedTime="
 				+ lastModifiedTime + "]";
 	}
 

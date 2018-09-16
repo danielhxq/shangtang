@@ -26,7 +26,7 @@ public class FaceReportsConverter implements Converter<FaceReports, FaceReportEn
 			entity.setTrace_type(fr.getTrace_type());
 			byte[] image = fr.getImage().getBytes();
 			entity.setBase64Image(new Binary(image));
-			entity.setBinaryImage(new String(Base64.decodeBase64(image)));
+			entity.setBinaryImage(new Binary(Base64.decodeBase64(image)));
 			Date now = new Date();
 			entity.setCreateTime(now);
 			entity.setLastModifiedTime(now);
