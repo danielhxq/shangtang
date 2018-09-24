@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-<!-- 	<property name="log_dir" value="/Users/daniel/Desktop" /> -->
-	<property name="log_dir" value="D:/logs/" />
+	<property name="log_dir" value="/Users/daniel/Desktop" />
+<!-- 	<property name="log_dir" value="D:/logs/" /> -->
 	<!-- 日志最大的历史 30天 -->
 	<!-- <property name="maxHistory" value="30" /> -->
 	<appender name="STDOUT"
@@ -18,7 +18,7 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 过滤器，只记录WARN级别的日志 -->
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>INFO</level>
+			<level>ERROR</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
@@ -49,7 +49,7 @@
 		</encoder>
 	</appender>
 
-	<root level="INFO">
+	<root level="ERROR">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ERROR" />
 	</root>
