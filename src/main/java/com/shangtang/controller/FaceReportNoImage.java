@@ -2,22 +2,11 @@ package com.shangtang.controller;
 
 import java.util.Date;
 
-import org.bson.types.Binary;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Document(collection = CollectionName.COLLECTION_NAME)
-@CompoundIndexes({
-		@CompoundIndex(name = "group_peron_timestamp_id", def = "{'group_id': 1, 'person_id': 1, 'timestamp': 1}", unique = true) })
-public class FaceReportEntity {
+public class FaceReportNoImage {
 
-	@Id
 	private String id;
 
 	private String request_id;
@@ -36,19 +25,9 @@ public class FaceReportEntity {
 
 	private String trace_type;
 
-	private Binary base64Image;
-
-	private Binary binaryImage;
-
-	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date createTime;
 
-	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date lastModifiedTime;
-
-	@DateTimeFormat(iso = ISO.DATE_TIME)
-	@Indexed(direction = IndexDirection.DESCENDING)
-	private Date timestampTime;
 
 	public String getId() {
 		return id;
@@ -138,36 +117,11 @@ public class FaceReportEntity {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
-	public Binary getBase64Image() {
-		return base64Image;
-	}
-
-	public void setBase64Image(Binary base64Image) {
-		this.base64Image = base64Image;
-	}
-
-	public Binary getBinaryImage() {
-		return binaryImage;
-	}
-
-	public void setBinaryImage(Binary binaryImage) {
-		this.binaryImage = binaryImage;
-	}
-
-	public Date getTimestampTime() {
-		return timestampTime;
-	}
-
-	public void setTimestampTime(Date timestampTime) {
-		this.timestampTime = timestampTime;
-	}
-
 	@Override
 	public String toString() {
-		return "FaceReportEntity [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
+		return "FaceReportNoImage [id=" + id + ", request_id=" + request_id + ", group_id=" + group_id + ", person_id="
 				+ person_id + ", device_id=" + device_id + ", camera_id=" + camera_id + ", camera_name=" + camera_name
-				+ ", timestamp=" + timestamp + ", timestampTime=" + timestampTime + ", trace_type=" + trace_type
-				+ ", base64Image=" + base64Image + ", binaryImage=" + binaryImage + ", createTime=" + createTime
+				+ ", timestamp=" + timestamp + ", trace_type=" + trace_type + ", createTime=" + createTime
 				+ ", lastModifiedTime=" + lastModifiedTime + "]";
 	}
 

@@ -52,7 +52,7 @@ public class STImageController {
 		}
 	}
 
-	@GetMapping("downlaod/image/{id}")
+	@GetMapping("download/image/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> downloadImage(@PathVariable String id) throws UnsupportedEncodingException {
 		FaceReportEntity entity = faceReportRepository.findOne(id);

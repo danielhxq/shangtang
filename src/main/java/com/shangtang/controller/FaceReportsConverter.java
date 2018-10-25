@@ -23,6 +23,7 @@ public class FaceReportsConverter implements Converter<FaceReports, FaceReportEn
 			entity.setCamera_id(fr.getCamera_id());
 			entity.setCamera_name(fr.getCamera_name());
 			entity.setTimestamp(fr.getTimestamp());
+			entity.setTimestampTime(new Date(Long.parseLong(fr.getTimestamp()) * 1000));
 			entity.setTrace_type(fr.getTrace_type());
 			byte[] image = fr.getImage().getBytes();
 			entity.setBase64Image(new Binary(image));

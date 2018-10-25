@@ -7,13 +7,12 @@ import org.springframework.data.domain.Sort;
 
 public class FaceReportPageable implements Serializable, Pageable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6209463185620537769L;
 
 	private Integer pagenumber = 1;
-	private Integer pagesize = 100;
+
+	private Integer pagesize = 1000;
+
 	private Sort sort;
 
 	public void setSort(Sort sort) {
