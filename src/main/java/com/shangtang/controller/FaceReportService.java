@@ -12,7 +12,8 @@ public interface FaceReportService {
 
 	@WebMethod(operationName = "getFaceReportEntitiesByPage")
 	List<SapFaceReport> getFaceReportEntitiesByPage(@WebParam(name = "group_id") String group_id,
-			@WebParam(name = "date") Date date, @WebParam(name = "pageNumber") Integer pageNumber) throws Exception;
+			@WebParam(name = "startDay") Date startDay, @WebParam(name = "endDay") Date endDay,
+			@WebParam(name = "pageNumber") Integer pageNumber) throws Exception;
 
 	@WebMethod(operationName = "getFaceReportStatistics")
 	FaceReportStatistic getFaceReportStatistics(@WebParam(name = "group_id") String group_id,
