@@ -36,10 +36,11 @@ public class FaceReportServiceImpl implements FaceReportService {
 	private MongoTemplate mongoTemplate;
 
 	@Override
-	public List<SapFaceReport> getFaceReportEntitiesByPage(String group_id, Date date, Integer pageNumber)
-			throws Exception {
+	public List<SapFaceReport> getFaceReportEntitiesByPage(String group_id, Date startDay, Date endDay,
+			Integer pageNumber) throws Exception {
+		long start = System.currentTimeMillis();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateTime = sdf.format(date);
+		String dateTime = sdf.format(startDay);
 		Date today = null;
 		try {
 			today = sdf.parse(dateTime);
@@ -47,10 +48,20 @@ public class FaceReportServiceImpl implements FaceReportService {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());
 		}
+
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		dateTime = sdf1.format(endDay);
+		Date tomorrow = null;
+		try {
+			tomorrow = sdf1.parse(dateTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(today);
+		cal.setTime(tomorrow);
 		cal.add(Calendar.DATE, 1);
-		Date tomorrow = cal.getTime();
+		tomorrow = cal.getTime();
 //		DBObject query = new BasicDBObject();
 //		query.put("timestampTime", new BasicDBObject("$gte", today).append("$lt", tomorrow));
 		FaceReportPageable pageable = new FaceReportPageable();
@@ -81,6 +92,7 @@ public class FaceReportServiceImpl implements FaceReportService {
 			sfr.setCreateTime(e.getCreateTime());
 			faceReportEntities.add(sfr);
 		}
+		System.out.println("Time:" + (System.currentTimeMillis() - start));
 		return faceReportEntities;
 	}
 
