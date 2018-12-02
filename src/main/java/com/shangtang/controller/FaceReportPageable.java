@@ -11,7 +11,7 @@ public class FaceReportPageable implements Serializable, Pageable {
 
 	private Integer pagenumber = 1;
 
-	private Integer pagesize = 1000;
+	private Integer pagesize = 3000;
 
 	private Sort sort;
 
