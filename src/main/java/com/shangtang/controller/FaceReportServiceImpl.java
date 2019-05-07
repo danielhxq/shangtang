@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.jws.WebService;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +19,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @WebService(targetNamespace = "http://controller.shangtang.com", endpointInterface = "com.shangtang.controller.FaceReportService")
 public class FaceReportServiceImpl implements FaceReportService {
@@ -69,31 +67,13 @@ public class FaceReportServiceImpl implements FaceReportService {
 		orders.add(new Order(Direction.ASC, "timestampTime"));
 		pageable.setSort(new Sort(orders));
 		pageable.setPagenumber(pageNumber);
-		Page<FaceReportNoImage> p = faceReportNoImageRepository.query(today, tomorrow, group_id, pageable);
-		List<SapFaceReport> faceReportEntities = null;
+		Page<SapFaceReport> p = faceReportNoImageRepository.query(today, tomorrow, group_id, pageable);
 		if (p == null) {
 			return new LinkedList<SapFaceReport>();
 		}
-		faceReportEntities = new LinkedList<SapFaceReport>();
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getRequest();
-		for (FaceReportNoImage e : p.getContent()) {
-			SapFaceReport sfr = new SapFaceReport();
-			sfr.setDevice_id(e.getDevice_id());
-			sfr.setCamera_id(e.getCamera_id());
-			sfr.setCamera_name(e.getCamera_name());
-			sfr.setGroup_id(e.getGroup_id());
-			sfr.setPerson_id(e.getPerson_id());
-			sfr.setTimestamp(e.getTimestamp());
-			sfr.setTrace_type(e.getTrace_type());
-			sfr.setRequest_id(e.getRequest_id());
-			sfr.setImageDownloadUrl((String) request.getScheme() + "://" + request.getServerName() + ":"
-					+ request.getServerPort() + "/st/image/" + e.getId());
-			sfr.setCreateTime(e.getCreateTime());
-			faceReportEntities.add(sfr);
-		}
+		System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath());
 		System.out.println("Time:" + (System.currentTimeMillis() - start));
-		return faceReportEntities;
+		return p.getContent();
 	}
 
 	@Override

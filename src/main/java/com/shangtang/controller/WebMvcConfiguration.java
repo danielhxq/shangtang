@@ -16,10 +16,10 @@ public class WebMvcConfiguration {
 	@Bean
 	public ConversionService conversionService() {
 		ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
-		Set<Converter<FaceReports, FaceReportEntities>> converters = new HashSet<Converter<FaceReports, FaceReportEntities>>();
-		converters.add(new FaceReportsConverter());
-		// converters.add(new IntegerToDateConverter());
-		bean.setConverters(converters);
+		Set<Converter<?, ?>> converterList = new HashSet<Converter<?, ?>>();
+		converterList.add(new FaceReportsConverter());
+		converterList.add(new FaceReportNoImageConverter());
+		bean.setConverters(converterList);
 		bean.afterPropertiesSet();
 		return bean.getObject();
 	}

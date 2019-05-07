@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 @Configuration
 @Repository("faceReportNoImageRepository")
-public interface FaceReportNoImageRepository extends MongoRepository<FaceReportNoImage, String> {
+public interface FaceReportNoImageRepository extends MongoRepository<FaceReportNoImage, SapFaceReport> {
 
 	@Query(value = "{'timestampTime':{$gte:?0, $lt:?1}, 'group_id' : ?2}")
-	public Page<FaceReportNoImage> query(Date beginTime, Date endTime, String group_id, Pageable pageable);
+	public Page<SapFaceReport> query(Date beginTime, Date endTime, String group_id, Pageable pageable);
 }
